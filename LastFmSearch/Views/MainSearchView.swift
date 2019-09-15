@@ -76,6 +76,22 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
         return ElementSizesManager.cellRowHeight
     }
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+            cell.transform = CGAffineTransform(translationX: 0, y: ElementSizesManager.cellRowHeight)
+            cell.layer.shadowColor = UIColor.black.cgColor
+            cell.layer.shadowOffset = CGSize(width: 10, height: 10)
+            cell.alpha = 0
+            
+            UIView.beginAnimations("rotation", context: nil)
+            UIView.setAnimationDuration(0.5)
+            cell.transform = CGAffineTransform(translationX: 0, y: 0)
+            cell.alpha = 1
+            cell.layer.shadowOffset = CGSize(width: 0, height: 0)
+            UIView.commitAnimations()
+    }
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let searchDetailController = SearchDetailController()
         searchDetailController.viewModel = viewModel
@@ -155,13 +171,12 @@ final class MainSearchView: UIView {
     var searchField: UITextField = {
         var textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.placeholder = "Search Artist, Album or Track..."
-        textField.layer.borderColor = UIColor.lightGray.cgColor
+        textField.layer.borderColor = UIColor.robinGreen.cgColor
         textField.layer.borderWidth = 0.5
         textField.layer.cornerRadius = 10
         textField.clipsToBounds = true
         textField.textColor = UIColor.lightGray
-        textField.attributedPlaceholder = NSAttributedString(string: "Search Artist, Album or Track...",
+        textField.attributedPlaceholder = NSAttributedString(string: "  Search Artist, Album or Track...",
                                                              attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         return textField
     }()
@@ -179,7 +194,7 @@ final class MainSearchView: UIView {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.layer.cornerRadius = 10
         tableView.clipsToBounds = true
-        tableView.backgroundColor = UIColor.lightGray
+        tableView.backgroundColor = UIColor.black
         return tableView
     }()
     
@@ -203,6 +218,7 @@ final class MainSearchView: UIView {
         
         searchResultsTableView.dataSource = self
         searchResultsTableView.delegate = self
+        searchResultsTableView.separatorStyle = .none
         
         setupConstraints()
     }

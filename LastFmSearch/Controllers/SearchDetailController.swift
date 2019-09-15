@@ -48,21 +48,19 @@ class SearchDetailController: UIViewController {
             result in
             
             if let result = result {
-                var searchDetailController = SearchDetailController()
-                searchDetailController.artistObject = result
-                searchDetailController.descriptionText = result.bio
-                
                 DispatchQueue.main.async {
+                    let searchDetailController = SearchDetailController()
+                    searchDetailController.artistObject = result
+                    searchDetailController.descriptionText = result.bio
                     self.navigationController?.pushViewController(searchDetailController, animated: true)
                 }
-                
+            } else {
+                let alert = UIAlertController(title: "Error", message: "Artist info not found.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
+                DispatchQueue.main.async {
+                    self.present(alert, animated: true)
+                }
             }
         })
-       
-        
-        
-        
-        
     }
-    
 }

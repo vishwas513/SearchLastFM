@@ -81,13 +81,65 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
         switch viewModel?.searchSelectedSegmentIndex {
         case 0:
             searchDetailController.artistObject = viewModel?.artistList[indexPath.row]
+            guard let name = viewModel?.artistList[indexPath.row].name else { return }
+            viewModel?.getDescriptionForEntity(mode: SearchResultType.artist, entityName: name, completion: {
+                result in
+                
+                if let result = result {
+                    searchDetailController.descriptionText = result
+                    DispatchQueue.main.async {
+                        self.controller?.navigationController?.pushViewController(searchDetailController, animated: true)
+                    }
+                } else {
+                    let alert = UIAlertController(title: "Error", message: "Network Error occured.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
+                    DispatchQueue.main.async {
+                        self.controller?.present(alert, animated: true)
+                    }
+                }
+                
+            })
+            
         case 1:
             searchDetailController.trackObject = viewModel?.trackList[indexPath.row]
+            guard let name = viewModel?.trackList[indexPath.row].name, let artistName = viewModel?.trackList[indexPath.row].artist else { return }
+            viewModel?.getDescriptionForEntity(mode: SearchResultType.track, entityName: name, artistName: artistName, completion: {
+                result in
+                if let result = result {
+                    searchDetailController.descriptionText = result
+                    DispatchQueue.main.async {
+                        self.controller?.navigationController?.pushViewController(searchDetailController, animated: true)
+                    }
+                } else {
+                    let alert = UIAlertController(title: "Error", message: "Network Error occured.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
+                    DispatchQueue.main.async {
+                        self.controller?.present(alert, animated: true)
+                    }
+                }
+            })
         default:
             searchDetailController.albumObject = viewModel?.albumList[indexPath.row]
+            guard let name = viewModel?.albumList[indexPath.row].name, let artistName = viewModel?.albumList[indexPath.row].artist else { return }
+            viewModel?.getDescriptionForEntity(mode: SearchResultType.album, entityName: name, artistName: artistName, completion: {
+                result in
+                if let result = result {
+                    searchDetailController.descriptionText = result
+                    DispatchQueue.main.async {
+                        self.controller?.navigationController?.pushViewController(searchDetailController, animated: true)
+                    }
+                } else {
+                    let alert = UIAlertController(title: "Error", message: "Network Error occured.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
+                    DispatchQueue.main.async {
+                        self.controller?.present(alert, animated: true)
+                    }
+                }
+            })
+            
         }
         
-        controller?.navigationController?.pushViewController(searchDetailController, animated: true)
+        
         
         
     }

@@ -14,6 +14,7 @@ class SearchDetailController: UIViewController {
     var artistObject: Artist?
     var trackObject: Track?
     var albumObject: Album?
+    var descriptionText: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,7 @@ class SearchDetailController: UIViewController {
         } else if let albumObject = albumObject {
             searchDetailView.albumObject = albumObject
         }
+        searchDetailView.descriptionLabel.text = descriptionText
         searchDetailView.setupView()
         // Do any additional setup after loading the view.
     }

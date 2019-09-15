@@ -183,7 +183,7 @@ final class MainSearchViewModel {
                     let decoder = JSONDecoder()
                     decoder.keyDecodingStrategy = .convertFromSnakeCase
                     
-                    let jsonObject : Any = try JSONSerialization.jsonObject(with: response.body, options: [])
+                    let jsonObject: Any = try JSONSerialization.jsonObject(with: response.body, options: [])
                     guard let responseDictionary = jsonObject as? NSDictionary, let results = responseDictionary["results"] as? NSDictionary, let trackMatches = results["trackmatches"] as? NSDictionary, let trackArray = trackMatches["track"] as? NSArray else {
                         completion(.decodingDataFailed)
                         return
@@ -229,5 +229,58 @@ final class MainSearchViewModel {
             }
         })
     }
-
+    
+    func getDescriptionForEntity(mode: SearchResultType, entityName: String, artistName: String? = nil, completion: @escaping (String?) -> Void) {
+        var path = ""
+        guard let entityName = entityName.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
+        switch mode {
+        case .artist:
+            path = "?method=artist.getinfo&artist=\(entityName)&api_key=\(apiKey)&format=json"
+        case .track:
+            guard let artist = artistName?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
+            path = "?method=track.getInfo&api_key=\(apiKey)&artist=\(artist)&track=\(entityName)&format=json"
+        default:
+            guard let artist = artistName?.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
+            path = "?method=album.getinfo&api_key=\(apiKey)&artist=\(artist)&album=\(entityName)&format=json"
+        }
+        
+        let request = APIRequest.get(withPath: path)
+        
+         _ =  networkManager?.get(request, completion: { result in
+          
+            switch(result) {
+            case let .success(response) :
+                do {
+                    let jsonObject: Any = try JSONSerialization.jsonObject(with: response.body, options: [])
+                    
+                    switch mode {
+                    case .artist:
+                        guard let responseDictionary = jsonObject as? NSDictionary, let artist = responseDictionary["artist"] as? NSDictionary, let bio = artist["bio"] as? NSDictionary, let content = bio["content"] as? String else {
+                            completion(nil)
+                            return
+                        }
+                        completion(content)
+                    case .track:
+                        guard let responseDictionary = jsonObject as? NSDictionary, let track = responseDictionary["track"] as? NSDictionary, let wiki = track["wiki"] as? NSDictionary, let content = wiki["content"] as? String else {
+                            completion(nil)
+                            return
+                        }
+                        completion(content)
+                    default:
+                        guard let responseDictionary = jsonObject as? NSDictionary, let album = responseDictionary["album"] as? NSDictionary, let wiki = album["wiki"] as? NSDictionary, let content = wiki["content"] as? String else {
+                            completion(nil)
+                            return
+                        }
+                        completion(content)
+                    }
+                    
+                } catch {
+                    completion(nil)
+                }
+                
+            default:
+                completion(nil)
+            }
+        })
+    }
 }

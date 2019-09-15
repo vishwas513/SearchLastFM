@@ -256,19 +256,19 @@ final class MainSearchViewModel {
                     switch mode {
                     case .artist:
                         guard let responseDictionary = jsonObject as? NSDictionary, let artist = responseDictionary["artist"] as? NSDictionary, let bio = artist["bio"] as? NSDictionary, let content = bio["content"] as? String else {
-                            completion(nil)
+                            completion("")
                             return
                         }
                         completion(content)
                     case .track:
                         guard let responseDictionary = jsonObject as? NSDictionary, let track = responseDictionary["track"] as? NSDictionary, let wiki = track["wiki"] as? NSDictionary, let content = wiki["content"] as? String else {
-                            completion(nil)
+                            completion("")
                             return
                         }
                         completion(content)
                     default:
                         guard let responseDictionary = jsonObject as? NSDictionary, let album = responseDictionary["album"] as? NSDictionary, let wiki = album["wiki"] as? NSDictionary, let content = wiki["content"] as? String else {
-                            completion(nil)
+                            completion("")
                             return
                         }
                         completion(content)
@@ -282,5 +282,43 @@ final class MainSearchViewModel {
                 completion(nil)
             }
         })
+    }
+    
+    func getArtistInfo(artistName: String, completion: @escaping (Artist?) -> Void) {
+        guard let artistName = artistName.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
+        let path = "?method=artist.getinfo&artist=\(artistName)&api_key=\(apiKey)&format=json"
+        let request = APIRequest.get(withPath: path)
+        
+        _ =  networkManager?.get(request, completion: { result in
+            switch(result) {
+            case let .success(response) :
+                do {
+                    let jsonObject: Any = try JSONSerialization.jsonObject(with: response.body, options: [])
+                    guard let responseDictionary = jsonObject as? NSDictionary, let artist = responseDictionary["artist"] as? NSDictionary, let imageUrlArray = artist["image"] as? NSArray, let imageUrl = imageUrlArray[0] as? NSDictionary, let highQualityImageUrl = imageUrlArray.lastObject as? NSDictionary, let bio = artist["bio"] as? NSDictionary, let content = bio["content"] as? String, let stats = artist["stats"] as? NSDictionary, let listeners = stats["listeners"] as? String  else {
+                        completion(nil)
+                        return
+                    }
+                    let artistObject = Artist()
+                    artistObject.name = artist["name"] as? String
+                    artistObject.link = artist["url"] as? String
+                    artistObject.imageUrl = imageUrl["#text"] as? String
+                    artistObject.highQualityImageUrl = highQualityImageUrl["#text"] as? String
+                    artistObject.bio = content
+                    artistObject.listeners = listeners
+                    
+                    completion(artistObject)
+                    
+                } catch {
+                    completion(nil)
+                }
+                
+            default:
+                completion(nil)
+            }
+            
+            
+        })
+        
+        
     }
 }

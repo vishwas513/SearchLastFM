@@ -78,6 +78,7 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let searchDetailController = SearchDetailController()
+        searchDetailController.viewModel = viewModel
         switch viewModel?.searchSelectedSegmentIndex {
         case 0:
             searchDetailController.artistObject = viewModel?.artistList[indexPath.row]

@@ -15,4 +15,5 @@ class Artist {
     var imageUrl: String?
     var highQualityImageUrl: String?
     var link: String?
+    var bio: String?
 }

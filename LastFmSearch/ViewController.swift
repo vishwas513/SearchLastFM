@@ -40,6 +40,14 @@ class ViewController: UIViewController {
     @objc func textChanged(_ textfield: UITextField) {
         if let searchText = textfield.text {
             
+            mainSearchViewModel.artistList = []
+            mainSearchViewModel.albumList = []
+            mainSearchViewModel.trackList = []
+            
+            mainSearchView.searchResultsTableView.reloadData()
+            
+            usleep(5000)
+            
             if searchText.isEmpty {
                 mainSearchView.searchSegmentController.isHidden = true
             } else {

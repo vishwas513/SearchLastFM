@@ -25,14 +25,46 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
         var cell = SearchResultCell()
         switch viewModel?.searchSelectedSegmentIndex {
         case 0:
+            guard let searchText = searchField.text, let apiKey = viewModel?.apiKey, let count = viewModel?.artistList.count else { return SearchResultCell() }
+            if indexPath.row == count - 1 {
+                viewModel?.artistPage += 1
+                viewModel?.searchArtists(searchTerm: searchText, apiKey: apiKey, updatePage: true, completion: {
+                    _ in
+                    DispatchQueue.main.async {
+                        tableView.reloadData()
+                    }
+                })
+            }
+            
             cell = SearchResultCell(artistObject: viewModel?.artistList[indexPath.row] ?? Artist())
             cell.searchImageView.image = UIImage(named: "placeholder")  //set placeholder image first.
             cell.searchImageView.downloadImageFrom(link: viewModel?.artistList[indexPath.row].imageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
         case 1:
+            guard let searchText = searchField.text, let apiKey = viewModel?.apiKey, let count = viewModel?.trackList.count else { return SearchResultCell() }
+            if indexPath.row == count - 1 {
+                viewModel?.trackPage += 1
+                viewModel?.searchTracks(searchTerm: searchText, apiKey: apiKey, updatePage: true, completion: {
+                    _ in
+                    DispatchQueue.main.async {
+                        tableView.reloadData()
+                    }
+                })
+            }
+
             cell = SearchResultCell(trackObject: viewModel?.trackList[indexPath.row] ?? Track())
             cell.searchImageView.image = UIImage(named: "placeholder")  //set placeholder image first.
             cell.searchImageView.downloadImageFrom(link: viewModel?.trackList[indexPath.row].imageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
         default:
+            guard let searchText = searchField.text, let apiKey = viewModel?.apiKey, let count = viewModel?.albumList.count else { return SearchResultCell() }
+            if indexPath.row == count - 1 {
+                viewModel?.albumPage += 1
+                viewModel?.searchAlbums(searchTerm: searchText, apiKey: apiKey, updatePage: true, completion: {
+                    _ in
+                    DispatchQueue.main.async {
+                        tableView.reloadData()
+                    }
+                })
+            }
             cell = SearchResultCell(albumObject: viewModel?.albumList[indexPath.row] ?? Album())
             cell.searchImageView.image = UIImage(named: "placeholder")  //set placeholder image first.
             cell.searchImageView.downloadImageFrom(link: viewModel?.albumList[indexPath.row].imageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)

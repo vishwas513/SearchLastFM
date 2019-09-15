@@ -69,6 +69,9 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
             cell.searchImageView.image = UIImage(named: "placeholder")  //set placeholder image first.
             cell.searchImageView.downloadImageFrom(link: viewModel?.albumList[indexPath.row].imageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
         }
+        let cellBackgroundView = UIView()
+        cellBackgroundView.backgroundColor = UIColor.robinGreen.withAlphaComponent(0.1)
+        cell.selectedBackgroundView = cellBackgroundView
         return cell
     }
     
@@ -84,7 +87,7 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
             cell.alpha = 0
             
             UIView.beginAnimations("rotation", context: nil)
-            UIView.setAnimationDuration(0.5)
+            UIView.setAnimationDuration(0.7)
             cell.transform = CGAffineTransform(translationX: 0, y: 0)
             cell.alpha = 1
             cell.layer.shadowOffset = CGSize(width: 0, height: 0)

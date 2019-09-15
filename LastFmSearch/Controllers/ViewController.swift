@@ -33,6 +33,7 @@ class ViewController: UIViewController {
         mainSearchView.viewModel = mainSearchViewModel
         mainSearchView.searchSegmentController.addTarget(self, action: #selector(segmentControllerChanged(sender:)), for: .valueChanged)
         mainSearchView.searchSegmentController.isHidden = true
+        mainSearchView.controller = self
         // Do any additional setup after loading the view.
     }
     

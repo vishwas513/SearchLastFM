@@ -76,11 +76,28 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
         return ElementSizesManager.cellRowHeight
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let searchDetailController = SearchDetailController()
+        switch viewModel?.searchSelectedSegmentIndex {
+        case 0:
+            searchDetailController.artistObject = viewModel?.artistList[indexPath.row]
+        case 1:
+            searchDetailController.trackObject = viewModel?.trackList[indexPath.row]
+        default:
+            searchDetailController.albumObject = viewModel?.albumList[indexPath.row]
+        }
+        
+        controller?.navigationController?.pushViewController(searchDetailController, animated: true)
+        
+        
+    }
+    
 }
 
 
 final class MainSearchView: UIView {
     var viewModel: MainSearchViewModel?
+    var controller: ViewController?
     let mainSearchViewModel = MainSearchViewModel()
     var searchField: UITextField = {
         var textField = UITextField()
@@ -164,6 +181,4 @@ final class MainSearchView: UIView {
         ])
         
     }
-   
-
 }

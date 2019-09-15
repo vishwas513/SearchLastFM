@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		E9F56BBD232DC3DD0082951E /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F56BBC232DC3DD0082951E /* UIImage.swift */; };
+		E9F56BBF232EBAE80082951E /* SearchDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F56BBE232EBAE80082951E /* SearchDetailView.swift */; };
+		E9F56BC2232EBD810082951E /* SearchDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F56BC1232EBD810082951E /* SearchDetailController.swift */; };
 		E9F58367232D3B66002B4D22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F58366232D3B66002B4D22 /* AppDelegate.swift */; };
 		E9F58369232D3B66002B4D22 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F58368232D3B66002B4D22 /* ViewController.swift */; };
 		E9F5836F232D3B66002B4D22 /* LastFmSearch.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E9F5836D232D3B66002B4D22 /* LastFmSearch.xcdatamodeld */; };
@@ -51,6 +53,8 @@
 
 /* Begin PBXFileReference section */
 		E9F56BBC232DC3DD0082951E /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		E9F56BBE232EBAE80082951E /* SearchDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailView.swift; sourceTree = "<group>"; };
+		E9F56BC1232EBD810082951E /* SearchDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailController.swift; sourceTree = "<group>"; };
 		E9F58363232D3B66002B4D22 /* LastFmSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LastFmSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9F58366232D3B66002B4D22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9F58368232D3B66002B4D22 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -106,6 +110,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E9F56BC0232EBD320082951E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E9F58368232D3B66002B4D22 /* ViewController.swift */,
+				E9F56BC1232EBD810082951E /* SearchDetailController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		E9F5835A232D3B65002B4D22 = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +142,7 @@
 		E9F58365232D3B66002B4D22 /* LastFmSearch */ = {
 			isa = PBXGroup;
 			children = (
+				E9F56BC0232EBD320082951E /* Controllers */,
 				E9F583BA232D98F2002B4D22 /* Enums */,
 				E9F583B7232D96D4002B4D22 /* TableViewCells */,
 				E9F583B0232D813F002B4D22 /* Models */,
@@ -137,7 +151,6 @@
 				E9F583A3232D505F002B4D22 /* Views */,
 				E9F58397232D4D90002B4D22 /* Managers */,
 				E9F58366232D3B66002B4D22 /* AppDelegate.swift */,
-				E9F58368232D3B66002B4D22 /* ViewController.swift */,
 				E9F58370232D3B69002B4D22 /* Assets.xcassets */,
 				E9F58372232D3B69002B4D22 /* LaunchScreen.storyboard */,
 				E9F58375232D3B69002B4D22 /* Info.plist */,
@@ -190,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				E9F583A4232D507C002B4D22 /* MainSearchView.swift */,
+				E9F56BBE232EBAE80082951E /* SearchDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -376,12 +390,14 @@
 				E9F583B9232D96FD002B4D22 /* SearchResultCell.swift in Sources */,
 				E9F583B2232D8156002B4D22 /* Album.swift in Sources */,
 				E9F58369232D3B66002B4D22 /* ViewController.swift in Sources */,
+				E9F56BBF232EBAE80082951E /* SearchDetailView.swift in Sources */,
 				E9F5839C232D4E8C002B4D22 /* APIRequest.swift in Sources */,
 				E9F583A5232D507C002B4D22 /* MainSearchView.swift in Sources */,
 				E9F583A9232D5800002B4D22 /* ElementSizesManager.swift in Sources */,
 				E9F583BC232D9925002B4D22 /* SearchResultType.swift in Sources */,
 				E9F583B6232D941B002B4D22 /* Track.swift in Sources */,
 				E9F583A0232D4F0C002B4D22 /* HTTPHeader.swift in Sources */,
+				E9F56BC2232EBD810082951E /* SearchDetailController.swift in Sources */,
 				E9F58367232D3B66002B4D22 /* AppDelegate.swift in Sources */,
 				E9F56BBD232DC3DD0082951E /* UIImage.swift in Sources */,
 				E9F583AE232D653F002B4D22 /* MainSearchViewModel.swift in Sources */,

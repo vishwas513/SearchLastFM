@@ -12,4 +12,6 @@ class Album {
     var name: String?
     var artist: String?
     var imageUrl: String?
+    var highQualityImageUrl: String?
+    var link: String?
 }

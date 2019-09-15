@@ -77,11 +77,13 @@ final class MainSearchViewModel {
                     if updatePage {
                         self.albumList += albumArray.compactMap {
                             (item) -> Album in
-                            guard let albumDictionary = item as? NSDictionary, let imageUrlArray = albumDictionary["image"] as? NSArray, let imageUrl = imageUrlArray[0] as? NSDictionary else { return Album() }
+                            guard let albumDictionary = item as? NSDictionary, let imageUrlArray = albumDictionary["image"] as? NSArray, let imageUrl = imageUrlArray[0] as? NSDictionary, let highQualityImageUrl = imageUrlArray.lastObject as? NSDictionary else { return Album() }
                             let album = Album()
                             album.name = albumDictionary["name"] as? String
                             album.artist = albumDictionary["artist"] as? String
                             album.imageUrl = imageUrl["#text"] as? String
+                            album.highQualityImageUrl = highQualityImageUrl["#text"] as? String
+                            album.link = albumDictionary["url"] as? String
                             return album
                         }
                         
@@ -89,11 +91,13 @@ final class MainSearchViewModel {
                         
                         self.albumList = albumArray.compactMap {
                             (item) -> Album in
-                            guard let albumDictionary = item as? NSDictionary, let imageUrlArray = albumDictionary["image"] as? NSArray, let imageUrl = imageUrlArray[0] as? NSDictionary else { return Album() }
+                            guard let albumDictionary = item as? NSDictionary, let imageUrlArray = albumDictionary["image"] as? NSArray, let imageUrl = imageUrlArray[0] as? NSDictionary, let highQualityImageUrl = imageUrlArray.lastObject as? NSDictionary else { return Album() }
                             let album = Album()
                             album.name = albumDictionary["name"] as? String
                             album.artist = albumDictionary["artist"] as? String
                             album.imageUrl = imageUrl["#text"] as? String
+                            album.highQualityImageUrl = highQualityImageUrl["#text"] as? String
+                            album.link = albumDictionary["url"] as? String
                             return album
                         }
                     }
@@ -131,12 +135,14 @@ final class MainSearchViewModel {
                     if updatePage {
                         self.artistList += albumArray.compactMap {
                             (item) -> Artist in
-                            guard let artistDictionary = item as? NSDictionary, let imageUrlArray = artistDictionary["image"] as? NSArray, let imageUrl = imageUrlArray[0] as? NSDictionary else { return Artist() }
+                            guard let artistDictionary = item as? NSDictionary, let imageUrlArray = artistDictionary["image"] as? NSArray, let imageUrl = imageUrlArray[0] as? NSDictionary, let highQualityImageUrl = imageUrlArray.lastObject as? NSDictionary else { return Artist() }
                             let artist = Artist()
                             artist.name = artistDictionary["name"] as? String
                             artist.listeners = artistDictionary["listeners"] as? String
                             artist.imageUrl = imageUrl["#text"] as? String
                             artist.mbid = artistDictionary["mbid"] as? String
+                            artist.highQualityImageUrl = highQualityImageUrl["#text"] as? String
+                            artist.link = artistDictionary["url"] as? String
                             return artist
                         }
                         
@@ -144,12 +150,14 @@ final class MainSearchViewModel {
                         
                         self.artistList = albumArray.compactMap {
                             (item) -> Artist in
-                            guard let artistDictionary = item as? NSDictionary, let imageUrlArray = artistDictionary["image"] as? NSArray, let imageUrl = imageUrlArray[0] as? NSDictionary else { return Artist() }
+                            guard let artistDictionary = item as? NSDictionary, let imageUrlArray = artistDictionary["image"] as? NSArray, let imageUrl = imageUrlArray[0] as? NSDictionary, let highQualityImageUrl = imageUrlArray.lastObject as? NSDictionary else { return Artist() }
                             let artist = Artist()
                             artist.name = artistDictionary["name"] as? String
                             artist.listeners = artistDictionary["listeners"] as? String
                             artist.imageUrl = imageUrl["#text"] as? String
                             artist.mbid = artistDictionary["mbid"] as? String
+                            artist.highQualityImageUrl = highQualityImageUrl["#text"] as? String
+                            artist.link = artistDictionary["url"] as? String
                             return artist
                         }
                     }
@@ -184,26 +192,30 @@ final class MainSearchViewModel {
                     if updatePage {
                         self.trackList += trackArray.compactMap {
                             (item) -> Track in
-                            guard let trackDictionary = item as? NSDictionary, let imageUrlArray = trackDictionary["image"] as? NSArray, let imageUrl = imageUrlArray[0] as? NSDictionary else { return Track() }
+                            guard let trackDictionary = item as? NSDictionary, let imageUrlArray = trackDictionary["image"] as? NSArray, let imageUrl = imageUrlArray[0] as? NSDictionary, let highQualityImageUrl = imageUrlArray.lastObject as? NSDictionary else { return Track() }
                             let track = Track()
                             track.name = trackDictionary["name"] as? String
                             track.artist = trackDictionary["artist"] as? String
                             track.imageUrl = imageUrl["#text"] as? String
                             track.listeners = trackDictionary["listeners"] as? String
                             track.streamable = trackDictionary["streamable"] as? String
+                            track.highQualityImageUrl = highQualityImageUrl["#text"] as? String
+                            track.link = trackDictionary["url"] as? String
                             return track
                         }
                         
                     } else {
                         self.trackList = trackArray.compactMap {
                             (item) -> Track in
-                            guard let trackDictionary = item as? NSDictionary, let imageUrlArray = trackDictionary["image"] as? NSArray, let imageUrl = imageUrlArray[0] as? NSDictionary else { return Track() }
+                            guard let trackDictionary = item as? NSDictionary, let imageUrlArray = trackDictionary["image"] as? NSArray, let imageUrl = imageUrlArray[0] as? NSDictionary, let highQualityImageUrl = imageUrlArray.lastObject as? NSDictionary else { return Track() }
                             let track = Track()
                             track.name = trackDictionary["name"] as? String
                             track.artist = trackDictionary["artist"] as? String
                             track.imageUrl = imageUrl["#text"] as? String
                             track.listeners = trackDictionary["listeners"] as? String
                             track.streamable = trackDictionary["streamable"] as? String
+                            track.highQualityImageUrl = highQualityImageUrl["#text"] as? String
+                            track.link = trackDictionary["url"] as? String
                             return track
                         }
                     }

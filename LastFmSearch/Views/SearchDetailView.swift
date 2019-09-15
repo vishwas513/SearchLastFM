@@ -81,18 +81,21 @@ class SearchDetailView: UIView {
             headerLabel.text = artistObject.name
             subtitleLabel.text = "Listeners: \(String(describing: artistObject.listeners))"
             artistButton.isHidden = true
-            searchDetailImageView.downloadImageFrom(link: artistObject.imageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
+            searchDetailImageView.downloadImageFrom(link: artistObject.highQualityImageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
+            linkButton.setTitle(artistObject.link, for: .normal)
         } else if let trackObject = trackObject {
             headerLabel.text = trackObject.name
             subtitleLabel.text = "Listeners: \(String(describing: trackObject.listeners))"
             artistButton.setTitle(trackObject.artist, for: .normal)
-            searchDetailImageView.downloadImageFrom(link: trackObject.imageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
+            searchDetailImageView.downloadImageFrom(link: trackObject.highQualityImageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
+            linkButton.setTitle(trackObject.link, for: .normal)
             
         } else if let albumObject = albumObject {
             headerLabel.text = albumObject.name
             // subtitleLabel.text = "Listeners: \(String(describing: trackObject.listeners))"
             artistButton.setTitle(albumObject.artist, for: .normal)
-            searchDetailImageView.downloadImageFrom(link: albumObject.imageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
+            searchDetailImageView.downloadImageFrom(link: albumObject.highQualityImageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
+            linkButton.setTitle(albumObject.link, for: .normal)
         }
         
         

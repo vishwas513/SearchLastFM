@@ -13,4 +13,6 @@ class Artist {
     var listeners: String?
     var mbid: String?
     var imageUrl: String?
+    var highQualityImageUrl: String?
+    var link: String?
 }

@@ -14,4 +14,6 @@ class Track {
     var streamable: String?
     var listeners: String?
     var imageUrl: String?
+    var highQualityImageUrl: String?
+    var link: String?
 }

@@ -39,6 +39,7 @@ class SearchDetailView: UIView {
     var subtitleLabel: UILabel = {
         var label = UILabel()
         label.textColor = UIColor.darkGray
+        label.textAlignment = .center
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -54,9 +55,6 @@ class SearchDetailView: UIView {
     var descriptionLabel: UITextView = {
         var label = UITextView()
         label.textColor = UIColor.lightGray
-      //  label.numberOfLines = 0
-        label.sizeToFit()
-      //  label.lineBreakMode = NSLineBreakMode.byWordWrapping
         label.isScrollEnabled = true
         label.isEditable = false
         label.isUserInteractionEnabled = true
@@ -80,15 +78,15 @@ class SearchDetailView: UIView {
     
     func setupView() {
         
-        if let artistObject = artistObject {
+        if let artistObject = artistObject, let listeners = artistObject.listeners {
             headerLabel.text = artistObject.name
-            subtitleLabel.text = "Listeners: \(String(describing: artistObject.listeners))"
+            subtitleLabel.text = "Listeners: \(listeners)"
             artistButton.isHidden = true
             searchDetailImageView.downloadImageFrom(link: artistObject.highQualityImageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
             linkButton.setTitle(artistObject.link, for: .normal)
-        } else if let trackObject = trackObject {
+        } else if let trackObject = trackObject, let listeners = trackObject.listeners {
             headerLabel.text = trackObject.name
-            subtitleLabel.text = "Listeners: \(String(describing: trackObject.listeners))"
+            subtitleLabel.text = "Listeners: \(listeners)"
             artistButton.setTitle(trackObject.artist, for: .normal)
             searchDetailImageView.downloadImageFrom(link: trackObject.highQualityImageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
             linkButton.setTitle(trackObject.link, for: .normal)
@@ -132,8 +130,8 @@ class SearchDetailView: UIView {
             
             artistButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             artistButton.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: ElementSizesManager.defaultPaddingSize),
-            artistButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ElementSizesManager.defaultPaddingSize),
-            artistButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -ElementSizesManager.defaultPaddingSize),
+            artistButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ElementSizesManager.defaultPaddingSize + 100),
+            artistButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -ElementSizesManager.defaultPaddingSize - 100),
             artistButton.heightAnchor.constraint(equalToConstant: ElementSizesManager.cellHeaderTextHeight),
             
             linkButton.centerXAnchor.constraint(equalTo: centerXAnchor),
@@ -153,9 +151,6 @@ class SearchDetailView: UIView {
             descriptionLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ElementSizesManager.defaultPaddingSize),
             descriptionLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -ElementSizesManager.defaultPaddingSize),
             descriptionLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -ElementSizesManager.defaultPaddingSize)
-            
-            
-           
         ])
     }
 }

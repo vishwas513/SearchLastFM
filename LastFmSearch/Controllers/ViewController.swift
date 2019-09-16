@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     
     var mainSearchView: MainSearchView = { return MainSearchView() }()
     var networkManager: NetworkManager
@@ -34,6 +34,9 @@ class ViewController: UIViewController {
         mainSearchView.searchSegmentController.addTarget(self, action: #selector(segmentControllerChanged(sender:)), for: .valueChanged)
         mainSearchView.searchSegmentController.isHidden = true
         mainSearchView.controller = self
+        mainSearchView.searchField.delegate = self
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap)
         // Do any additional setup after loading the view.
     }
     
@@ -77,7 +80,14 @@ class ViewController: UIViewController {
         mainSearchViewModel.searchSelectedSegmentIndex = sender.selectedSegmentIndex
         mainSearchView.searchResultsTableView.reloadData()
     }
-
-
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
 }
 

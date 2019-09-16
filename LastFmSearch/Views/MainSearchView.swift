@@ -227,7 +227,6 @@ final class MainSearchView: UIView {
     }
     
     func setupConstraints() {
-        
         NSLayoutConstraint.activate([
             searchField.centerXAnchor.constraint(equalTo: centerXAnchor),
             searchField.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ElementSizesManager.defaultPaddingSize),
@@ -246,11 +245,6 @@ final class MainSearchView: UIView {
             searchResultsTableView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -ElementSizesManager.defaultPaddingSize),
             searchResultsTableView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ElementSizesManager.defaultPaddingSize),
             searchResultsTableView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -ElementSizesManager.defaultPaddingSize),
-            
-            
-            
-            
         ])
-        
     }
 }

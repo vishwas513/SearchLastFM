@@ -18,7 +18,7 @@ class SearchResultCell: UITableViewCell {
     
     var searchResultHeader: UILabel = {
         var label = UILabel()
-        label.textColor = UIColor.darkGray
+        label.textColor = UIColor.lightGray
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = .left
         return label
@@ -26,7 +26,7 @@ class SearchResultCell: UITableViewCell {
     
     var searchResultSubtitle: UILabel = {
         var label = UILabel()
-        label.textColor = UIColor.lightGray
+        label.textColor = UIColor.darkGray
         label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -34,27 +34,27 @@ class SearchResultCell: UITableViewCell {
     
     init(artistObject: Artist) {
         self.init()
-        
+        guard let listeners = artistObject.listeners else { return }
         searchResultHeader.text = artistObject.name
-        searchResultSubtitle.text = artistObject.listeners
+        searchResultSubtitle.text = "Listeners: \(listeners)"
         
         setupView()
     }
     
     init(albumObject: Album) {
         self.init()
-        
+        guard let artistName = albumObject.artist else { return }
         searchResultHeader.text = albumObject.name
-        searchResultSubtitle.text = albumObject.artist
+        searchResultSubtitle.text = "Artist: \(artistName)"
         
         setupView()
     }
     
     init(trackObject: Track) {
         self.init()
-        
+        guard let artistName = trackObject.artist else { return }
         searchResultHeader.text = trackObject.name
-        searchResultSubtitle.text = trackObject.artist
+        searchResultSubtitle.text = "Artist: \(artistName)"
         
         setupView()
     }

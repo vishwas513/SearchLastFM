@@ -10,6 +10,7 @@
 		E9F56BBD232DC3DD0082951E /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F56BBC232DC3DD0082951E /* UIImage.swift */; };
 		E9F56BBF232EBAE80082951E /* SearchDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F56BBE232EBAE80082951E /* SearchDetailView.swift */; };
 		E9F56BC2232EBD810082951E /* SearchDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F56BC1232EBD810082951E /* SearchDetailController.swift */; };
+		E9F56BC6232F2C130082951E /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F56BC5232F2C130082951E /* Array.swift */; };
 		E9F58367232D3B66002B4D22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F58366232D3B66002B4D22 /* AppDelegate.swift */; };
 		E9F58369232D3B66002B4D22 /* MainSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9F58368232D3B66002B4D22 /* MainSearchController.swift */; };
 		E9F5836F232D3B66002B4D22 /* LastFmSearch.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E9F5836D232D3B66002B4D22 /* LastFmSearch.xcdatamodeld */; };
@@ -55,6 +56,7 @@
 		E9F56BBC232DC3DD0082951E /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		E9F56BBE232EBAE80082951E /* SearchDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailView.swift; sourceTree = "<group>"; };
 		E9F56BC1232EBD810082951E /* SearchDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailController.swift; sourceTree = "<group>"; };
+		E9F56BC5232F2C130082951E /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		E9F58363232D3B66002B4D22 /* LastFmSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LastFmSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9F58366232D3B66002B4D22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E9F58368232D3B66002B4D22 /* MainSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSearchController.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 			children = (
 				E9F583AB232D5B92002B4D22 /* UIColor.swift */,
 				E9F56BBC232DC3DD0082951E /* UIImage.swift */,
+				E9F56BC5232F2C130082951E /* Array.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -398,6 +401,7 @@
 				E9F583B6232D941B002B4D22 /* Track.swift in Sources */,
 				E9F583A0232D4F0C002B4D22 /* HTTPHeader.swift in Sources */,
 				E9F56BC2232EBD810082951E /* SearchDetailController.swift in Sources */,
+				E9F56BC6232F2C130082951E /* Array.swift in Sources */,
 				E9F58367232D3B66002B4D22 /* AppDelegate.swift in Sources */,
 				E9F56BBD232DC3DD0082951E /* UIImage.swift in Sources */,
 				E9F583AE232D653F002B4D22 /* MainSearchViewModel.swift in Sources */,

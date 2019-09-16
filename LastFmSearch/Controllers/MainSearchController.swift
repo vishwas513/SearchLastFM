@@ -43,10 +43,6 @@ final class MainSearchController: UIViewController, UITextFieldDelegate {
             mainSearchViewModel.albumList = []
             mainSearchViewModel.trackList = []
             
-            mainSearchView.searchResultsTableView.reloadData()
-            // This is to fix a weird bug with simulator where entering characters extemely fast causes problems and arrays are not loaded yet. This problem should never occur on real device. The keyboard isn't capable of sending chanracters at that rate.
-            usleep(5000)
-            
             if searchText.isEmpty {
                 mainSearchView.searchSegmentController.isHidden = true
             } else {

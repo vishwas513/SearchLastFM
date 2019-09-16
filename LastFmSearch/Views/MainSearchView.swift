@@ -35,9 +35,9 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
                     }
                 })
             }
-                    cell = SearchResultCell(artistObject: viewModel?.artistList[indexPath.row] ?? Artist())
-            cell.searchImageView.image = UIImage(named: "placeholder")  //set placeholder image first.
-            cell.searchImageView.downloadImageFrom(link: viewModel?.artistList[indexPath.row].imageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
+            cell = SearchResultCell(artistObject: viewModel?.artistList[safe: indexPath.row] ?? Artist())
+            cell.searchImageView.image = UIImage(named: "placeholder")  //set placeholder image first
+            cell.searchImageView.downloadImageFrom(link: viewModel?.artistList[safe: indexPath.row]?.imageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
         case 1:
             guard let searchText = searchField.text, let apiKey = viewModel?.apiKey, let count = viewModel?.trackList.count else { return SearchResultCell() }
             if indexPath.row == count - 1 {
@@ -50,9 +50,9 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
                 })
             }
 
-            cell = SearchResultCell(trackObject: viewModel?.trackList[indexPath.row] ?? Track())
+            cell = SearchResultCell(trackObject: viewModel?.trackList[safe: indexPath.row] ?? Track())
             cell.searchImageView.image = UIImage(named: "placeholder")  //set placeholder image first.
-            cell.searchImageView.downloadImageFrom(link: viewModel?.trackList[indexPath.row].imageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
+            cell.searchImageView.downloadImageFrom(link: viewModel?.trackList[safe: indexPath.row]?.imageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
         default:
             guard let searchText = searchField.text, let apiKey = viewModel?.apiKey, let count = viewModel?.albumList.count else { return SearchResultCell() }
             if indexPath.row == count - 1 {
@@ -64,9 +64,9 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
                     }
                 })
             }
-            cell = SearchResultCell(albumObject: viewModel?.albumList[indexPath.row] ?? Album())
+            cell = SearchResultCell(albumObject: viewModel?.albumList[safe: indexPath.row] ?? Album())
             cell.searchImageView.image = UIImage(named: "placeholder")  //set placeholder image first.
-            cell.searchImageView.downloadImageFrom(link: viewModel?.albumList[indexPath.row].imageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
+            cell.searchImageView.downloadImageFrom(link: viewModel?.albumList[safe: indexPath.row]?.imageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
         }
         let cellBackgroundView = UIView()
         cellBackgroundView.backgroundColor = UIColor.robinGreen.withAlphaComponent(0.1)

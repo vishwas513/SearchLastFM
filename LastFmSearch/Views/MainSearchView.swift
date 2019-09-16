@@ -85,7 +85,7 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
             cell.alpha = 0
             
             UIView.beginAnimations("rotation", context: nil)
-            UIView.setAnimationDuration(0.7)
+            UIView.setAnimationDuration(0.2)
             cell.transform = CGAffineTransform(translationX: 0, y: 0)
             cell.alpha = 1
             cell.layer.shadowOffset = CGSize(width: 0, height: 0)
@@ -99,7 +99,7 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
         switch viewModel?.searchSelectedSegmentIndex {
             
         case 0:
-            searchDetailController.artistObject = viewModel?.artistList[indexPath.row]
+            searchDetailController.artistObject = viewModel?.artistList[safe: indexPath.row]
             guard let name = viewModel?.artistList[indexPath.row].name else { return }
             viewModel?.getDescriptionForEntity(mode: SearchResultType.artist, entityName: name, completion: {
                 result in
@@ -119,7 +119,7 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
             })
             
         case 1:
-            searchDetailController.trackObject = viewModel?.trackList[indexPath.row]
+            searchDetailController.trackObject = viewModel?.trackList[safe: indexPath.row]
             guard let name = viewModel?.trackList[indexPath.row].name, let artistName = viewModel?.trackList[indexPath.row].artist else { return }
             viewModel?.getDescriptionForEntity(mode: SearchResultType.track, entityName: name, artistName: artistName, completion: {
                 result in
@@ -139,7 +139,7 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
             
         default:
             searchDetailController.albumObject = viewModel?.albumList[indexPath.row]
-            guard let name = viewModel?.albumList[indexPath.row].name, let artistName = viewModel?.albumList[indexPath.row].artist else { return }
+            guard let name = viewModel?.albumList[safe: indexPath.row]?.name, let artistName = viewModel?.albumList[safe: indexPath.row]?.artist else { return }
             viewModel?.getDescriptionForEntity(mode: SearchResultType.album, entityName: name, artistName: artistName, completion: {
                 result in
                 if let result = result {

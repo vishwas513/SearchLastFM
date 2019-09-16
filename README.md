@@ -15,13 +15,21 @@
 - Fetches Artist when Artist name is tapped on Album or Track.
 - Sleek beautiful UI design.
 - Appearance Manager sets the theme universally.
+- Animations added to enhance user experience.
+- Clicking on item takes the user to the detail screen.
+- Searches artists, albums and tracks at the same time. 
+- Reacts to each keystroke and fetches results.
+- Shows detailed desciption if available for each search result.
+- Project has been built with heavy use of version control, including pull requests to maintain accountablity.
+- I have performed a code review on the project. 
 
 
 
 
 
 
-![](https://github.com/vishwas513/SearchLastFM/blob/master/Screenshots/pic1.png) ![](https://github.com/vishwas513/SearchLastFM/blob/master/Screenshots/pic2png) ![](https://github.com/vishwas513/SearchLastFM/blob/master/Screenshots/pic3png)
+![](https://github.com/vishwas513/SearchLastFM/blob/master/Screenshots/pic1.png)
+![](https://github.com/vishwas513/SearchLastFM/blob/master/Screenshots/pic2png)
 
 
 
@@ -37,6 +45,7 @@
 - Has been throughly tested, but haven't written TestCases due to lack of time. 
 - The ideal running enivorment is iOS 12.4, should work just fine on iOS 13 but hasn't been accounted for explicitly.
 - Has been tested on real devices.
+- Project does not use third party dependencies.
 
 Please feel free to contact me anytime if there is some issue, or if you need more information. Thanks.
 

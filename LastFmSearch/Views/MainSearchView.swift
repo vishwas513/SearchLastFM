@@ -85,7 +85,7 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
             cell.alpha = 0
             
             UIView.beginAnimations("rotation", context: nil)
-            UIView.setAnimationDuration(0.2)
+            UIView.setAnimationDuration(0.5)
             cell.transform = CGAffineTransform(translationX: 0, y: 0)
             cell.alpha = 1
             cell.layer.shadowOffset = CGSize(width: 0, height: 0)

@@ -8,12 +8,11 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class MainSearchController: UIViewController, UITextFieldDelegate {
     
     var mainSearchView: MainSearchView = { return MainSearchView() }()
     var networkManager: NetworkManager
     var mainSearchViewModel = MainSearchViewModel()
-    
     
     init(networkManager: NetworkManager) {
         self.networkManager = networkManager
@@ -40,7 +39,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
         // Do any additional setup after loading the view.
     }
     
-    
     @objc func textChanged(_ textfield: UITextField) {
         if let searchText = textfield.text {
             
@@ -49,7 +47,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
             mainSearchViewModel.trackList = []
             
             mainSearchView.searchResultsTableView.reloadData()
-            
+            // This is to fix a weird bug with simulator where entering characters extemely fast causes problems and arrays are not loaded yet. This problem should never occur on real device. The keyboard isn't capable of sending chanracters at that rate.
             usleep(5000)
             
             if searchText.isEmpty {
@@ -58,7 +56,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
                 mainSearchView.searchSegmentController.isHidden = false
                 mainSearchViewModel.search(searchTerm: searchText, completion: {
                     error in
-                    
                     if let error = error {
                         DispatchQueue.main.async {
                             let alert = UIAlertController(title: "Network Error", message: error.localizedDescription, preferredStyle: .alert)
@@ -76,7 +73,6 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func segmentControllerChanged(sender: UISegmentedControl) {
-        print(sender.selectedSegmentIndex)
         mainSearchViewModel.searchSelectedSegmentIndex = sender.selectedSegmentIndex
         mainSearchView.searchResultsTableView.reloadData()
     }

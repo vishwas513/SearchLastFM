@@ -169,7 +169,7 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
 
 final class MainSearchView: UIView {
     var viewModel: MainSearchViewModel?
-    var controller: ViewController?
+    var controller: MainSearchController?
     let mainSearchViewModel = MainSearchViewModel()
     var searchField: UITextField = {
         var textField = UITextField()

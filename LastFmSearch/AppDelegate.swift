@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame:UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
-        let viewController = ViewController(networkManager: client)
+        let viewController = MainSearchController(networkManager: client)
         window?.rootViewController = UINavigationController(rootViewController: viewController)
         
         AppearanceManager.setUpTheme()

@@ -34,9 +34,6 @@ final class MainSearchController: UIViewController, UITextFieldDelegate {
         mainSearchView.searchSegmentController.isHidden = true
         mainSearchView.controller = self
         mainSearchView.searchField.delegate = self
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tap)
-        // Do any additional setup after loading the view.
     }
     
     @objc func textChanged(_ textfield: UITextField) {
@@ -75,10 +72,6 @@ final class MainSearchController: UIViewController, UITextFieldDelegate {
     @objc func segmentControllerChanged(sender: UISegmentedControl) {
         mainSearchViewModel.searchSelectedSegmentIndex = sender.selectedSegmentIndex
         mainSearchView.searchResultsTableView.reloadData()
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

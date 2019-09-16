@@ -27,7 +27,6 @@ final class MainSearchViewModel {
     }()
     
     func search(searchTerm: String, completion: @escaping (NetworkError?) -> Void) {
-        guard let searchTerm = searchTerm.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
         searchAlbums(searchTerm: searchTerm, apiKey: apiKey, updatePage: false, completion: {
             error in
             completion(error)
@@ -45,6 +44,7 @@ final class MainSearchViewModel {
     }
     
     func searchAlbums(searchTerm: String, apiKey: String, updatePage: Bool, completion: @escaping (NetworkError?) -> Void) {
+        guard let searchTerm = searchTerm.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
         let path = "?method=album.search&album=\(searchTerm)&limit=\(pageLimit)&page=\(albumPage)&api_key=\(apiKey)&format=json"
         let request = APIRequest.get(withPath: path)
         
@@ -94,6 +94,7 @@ final class MainSearchViewModel {
     }
     
     func searchArtists(searchTerm: String, apiKey: String, updatePage: Bool, completion: @escaping (NetworkError?) -> Void) {
+        guard let searchTerm = searchTerm.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
         let path = "?method=artist.search&artist=\(searchTerm)&limit=\(pageLimit)&page=\(artistPage)&api_key=\(apiKey)&format=json"
         let request = APIRequest.get(withPath: path)
         
@@ -146,6 +147,7 @@ final class MainSearchViewModel {
     }
     
     func searchTracks(searchTerm: String, apiKey: String, updatePage: Bool, completion: @escaping (NetworkError?) -> Void) {
+        guard let searchTerm = searchTerm.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else { return }
         let path = "?method=track.search&track=\(searchTerm)&limit=\(pageLimit)&page=\(trackPage)&api_key=\(apiKey)&format=json"
         let request = APIRequest.get(withPath: path)
         

@@ -35,8 +35,7 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
                     }
                 })
             }
-            
-            cell = SearchResultCell(artistObject: viewModel?.artistList[indexPath.row] ?? Artist())
+                    cell = SearchResultCell(artistObject: viewModel?.artistList[indexPath.row] ?? Artist())
             cell.searchImageView.image = UIImage(named: "placeholder")  //set placeholder image first.
             cell.searchImageView.downloadImageFrom(link: viewModel?.artistList[indexPath.row].imageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
         case 1:

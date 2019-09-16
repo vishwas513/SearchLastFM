@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchDetailView: UIView {
+final class SearchDetailView: UIView {
     
     var artistObject: Artist?
     var albumObject: Album?
@@ -77,6 +77,7 @@ class SearchDetailView: UIView {
     }
     
     func setupView() {
+        backgroundColor = .black
         
         if let artistObject = artistObject, let listeners = artistObject.listeners {
             headerLabel.text = artistObject.name
@@ -98,11 +99,7 @@ class SearchDetailView: UIView {
             searchDetailImageView.downloadImageFrom(link: albumObject.highQualityImageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
             linkButton.setTitle(albumObject.link, for: .normal)
         }
-        
-        
-        
-        backgroundColor = .black
-        
+    
         addSubview(searchDetailImageView)
         addSubview(headerLabel)
         addSubview(subtitleLabel)
@@ -114,7 +111,6 @@ class SearchDetailView: UIView {
     }
     
     func setupConstraints() {
-        
         NSLayoutConstraint.activate([
             searchDetailImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             searchDetailImageView.topAnchor.constraint(equalTo: topAnchor, constant: ElementSizesManager.navigationBarMaxY),
@@ -130,8 +126,8 @@ class SearchDetailView: UIView {
             
             artistButton.centerXAnchor.constraint(equalTo: centerXAnchor),
             artistButton.topAnchor.constraint(equalTo: headerLabel.bottomAnchor, constant: ElementSizesManager.defaultPaddingSize),
-            artistButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ElementSizesManager.defaultPaddingSize + 100),
-            artistButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -ElementSizesManager.defaultPaddingSize - 100),
+            artistButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: ElementSizesManager.defaultPaddingSize),
+            artistButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -ElementSizesManager.defaultPaddingSize),
             artistButton.heightAnchor.constraint(equalToConstant: ElementSizesManager.cellHeaderTextHeight),
             
             linkButton.centerXAnchor.constraint(equalTo: centerXAnchor),

@@ -8,12 +8,11 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITextFieldDelegate {
+final class MainSearchController: UIViewController, UITextFieldDelegate {
     
     var mainSearchView: MainSearchView = { return MainSearchView() }()
     var networkManager: NetworkManager
     var mainSearchViewModel = MainSearchViewModel()
-    
     
     init(networkManager: NetworkManager) {
         self.networkManager = networkManager
@@ -35,11 +34,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         mainSearchView.searchSegmentController.isHidden = true
         mainSearchView.controller = self
         mainSearchView.searchField.delegate = self
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tap)
-        // Do any additional setup after loading the view.
     }
-    
     
     @objc func textChanged(_ textfield: UITextField) {
         if let searchText = textfield.text {
@@ -48,17 +43,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
             mainSearchViewModel.albumList = []
             mainSearchViewModel.trackList = []
             
-            mainSearchView.searchResultsTableView.reloadData()
-            
-            usleep(5000)
-            
             if searchText.isEmpty {
                 mainSearchView.searchSegmentController.isHidden = true
             } else {
                 mainSearchView.searchSegmentController.isHidden = false
                 mainSearchViewModel.search(searchTerm: searchText, completion: {
                     error in
-                    
                     if let error = error {
                         DispatchQueue.main.async {
                             let alert = UIAlertController(title: "Network Error", message: error.localizedDescription, preferredStyle: .alert)
@@ -76,13 +66,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func segmentControllerChanged(sender: UISegmentedControl) {
-        print(sender.selectedSegmentIndex)
         mainSearchViewModel.searchSelectedSegmentIndex = sender.selectedSegmentIndex
         mainSearchView.searchResultsTableView.reloadData()
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

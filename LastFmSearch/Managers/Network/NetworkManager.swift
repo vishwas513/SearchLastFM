@@ -24,7 +24,6 @@ enum NetworkError: Error {
     case noNetworkResponse
     case network(Error)
     case dataTaskError(nsError: NSError)
-    case tokenRequired
     case imageData
     case emptyResponse
     case unauthorized
@@ -122,48 +121,6 @@ final class NetworkManager: NSObject, Transport {
         let task = dataTask(request, completion: completion)
         return task
     }
-    
-    func getImage(for url: URL, completion: @escaping ImageResult) -> URLSessionDownloadTask {
-        let request = URLRequest(url: url)
-        OperationQueue.main.addOperation {
-            self.networkActivityCount += 1
-        }
-        let task = urlSession.downloadTask(with: request, completionHandler: { (fileURL, _, error) in
-            guard let fileURL = fileURL else {
-                guard let error = error else { return }
-                OperationQueue.main.addOperation {
-                    self.networkActivityCount -= 1
-                    completion(.failure(.network(error)))
-                }
-                return
-            }
-            
-            // You must move the file or open it for reading before this closure returns or it will be deleted
-            if let data = try? Data(contentsOf: fileURL), let image = UIImage(data: data) {
-                OperationQueue.main.addOperation {
-                    self.networkActivityCount -= 1
-                    completion(.success(image))
-                }
-            } else {
-                OperationQueue.main.addOperation {
-                    self.networkActivityCount -= 1
-                    completion(.failure(.imageData))
-                }
-            }
-        })
-        
-        task.resume()
-        return task
-    }
-    
-    func getImage(urlString: String, completion: @escaping ImageResult) {
-        guard let sanitizedURLString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed), let url = URL(string: sanitizedURLString) else {
-            completion(.failure(.badURL))
-            return
-        }
-        
-        _ = getImage(for: url, completion: completion)
-    }
 }
 
 // MARK: - Private helpers
@@ -255,7 +212,6 @@ private extension NetworkManager {
         }
         os_log("Requested URL: %@", log: logger, type: .info, request.url!.absoluteString)
         request.httpMethod = apiRequest.method.rawValue
-        
         
         return request
     }

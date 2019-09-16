@@ -17,6 +17,4 @@ protocol Transport {
     func get(_ request: APIRequest, completion: @escaping NetworkResult) -> URLSessionDataTask
     func post(_ request: APIRequest, completion: @escaping NetworkResult) -> URLSessionUploadTask
     func delete(_ request: APIRequest, completion: @escaping NetworkResult) -> URLSessionDataTask
-    func getImage(for url: URL, completion: @escaping ImageResult) -> URLSessionDownloadTask
-    func getImage(urlString: String, completion: @escaping ImageResult)
 }

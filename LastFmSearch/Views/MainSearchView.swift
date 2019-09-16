@@ -35,10 +35,9 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
                     }
                 })
             }
-            
-            cell = SearchResultCell(artistObject: viewModel?.artistList[indexPath.row] ?? Artist())
-            cell.searchImageView.image = UIImage(named: "placeholder")  //set placeholder image first.
-            cell.searchImageView.downloadImageFrom(link: viewModel?.artistList[indexPath.row].imageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
+            cell = SearchResultCell(artistObject: viewModel?.artistList[safe: indexPath.row] ?? Artist())
+            cell.searchImageView.image = UIImage(named: "placeholder")  //set placeholder image first
+            cell.searchImageView.downloadImageFrom(link: viewModel?.artistList[safe: indexPath.row]?.imageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
         case 1:
             guard let searchText = searchField.text, let apiKey = viewModel?.apiKey, let count = viewModel?.trackList.count else { return SearchResultCell() }
             if indexPath.row == count - 1 {
@@ -51,9 +50,9 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
                 })
             }
 
-            cell = SearchResultCell(trackObject: viewModel?.trackList[indexPath.row] ?? Track())
+            cell = SearchResultCell(trackObject: viewModel?.trackList[safe: indexPath.row] ?? Track())
             cell.searchImageView.image = UIImage(named: "placeholder")  //set placeholder image first.
-            cell.searchImageView.downloadImageFrom(link: viewModel?.trackList[indexPath.row].imageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
+            cell.searchImageView.downloadImageFrom(link: viewModel?.trackList[safe: indexPath.row]?.imageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
         default:
             guard let searchText = searchField.text, let apiKey = viewModel?.apiKey, let count = viewModel?.albumList.count else { return SearchResultCell() }
             if indexPath.row == count - 1 {
@@ -65,9 +64,9 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
                     }
                 })
             }
-            cell = SearchResultCell(albumObject: viewModel?.albumList[indexPath.row] ?? Album())
+            cell = SearchResultCell(albumObject: viewModel?.albumList[safe: indexPath.row] ?? Album())
             cell.searchImageView.image = UIImage(named: "placeholder")  //set placeholder image first.
-            cell.searchImageView.downloadImageFrom(link: viewModel?.albumList[indexPath.row].imageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
+            cell.searchImageView.downloadImageFrom(link: viewModel?.albumList[safe: indexPath.row]?.imageUrl ?? "", contentMode: UIView.ContentMode.scaleAspectFit)
         }
         let cellBackgroundView = UIView()
         cellBackgroundView.backgroundColor = UIColor.robinGreen.withAlphaComponent(0.1)
@@ -80,14 +79,13 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
             cell.transform = CGAffineTransform(translationX: 0, y: ElementSizesManager.cellRowHeight)
             cell.layer.shadowColor = UIColor.black.cgColor
             cell.layer.shadowOffset = CGSize(width: 10, height: 10)
             cell.alpha = 0
             
             UIView.beginAnimations("rotation", context: nil)
-            UIView.setAnimationDuration(0.7)
+            UIView.setAnimationDuration(0.2)
             cell.transform = CGAffineTransform(translationX: 0, y: 0)
             cell.alpha = 1
             cell.layer.shadowOffset = CGSize(width: 0, height: 0)
@@ -99,8 +97,9 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
         let searchDetailController = SearchDetailController()
         searchDetailController.viewModel = viewModel
         switch viewModel?.searchSelectedSegmentIndex {
+            
         case 0:
-            searchDetailController.artistObject = viewModel?.artistList[indexPath.row]
+            searchDetailController.artistObject = viewModel?.artistList[safe: indexPath.row]
             guard let name = viewModel?.artistList[indexPath.row].name else { return }
             viewModel?.getDescriptionForEntity(mode: SearchResultType.artist, entityName: name, completion: {
                 result in
@@ -117,11 +116,10 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
                         self.controller?.present(alert, animated: true)
                     }
                 }
-                
             })
             
         case 1:
-            searchDetailController.trackObject = viewModel?.trackList[indexPath.row]
+            searchDetailController.trackObject = viewModel?.trackList[safe: indexPath.row]
             guard let name = viewModel?.trackList[indexPath.row].name, let artistName = viewModel?.trackList[indexPath.row].artist else { return }
             viewModel?.getDescriptionForEntity(mode: SearchResultType.track, entityName: name, artistName: artistName, completion: {
                 result in
@@ -138,9 +136,10 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
                     }
                 }
             })
+            
         default:
             searchDetailController.albumObject = viewModel?.albumList[indexPath.row]
-            guard let name = viewModel?.albumList[indexPath.row].name, let artistName = viewModel?.albumList[indexPath.row].artist else { return }
+            guard let name = viewModel?.albumList[safe: indexPath.row]?.name, let artistName = viewModel?.albumList[safe: indexPath.row]?.artist else { return }
             viewModel?.getDescriptionForEntity(mode: SearchResultType.album, entityName: name, artistName: artistName, completion: {
                 result in
                 if let result = result {
@@ -156,21 +155,16 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
                     }
                 }
             })
-            
         }
-        
-        
-        
-        
     }
-    
 }
 
 
 final class MainSearchView: UIView {
     var viewModel: MainSearchViewModel?
-    var controller: ViewController?
+    var controller: MainSearchController?
     let mainSearchViewModel = MainSearchViewModel()
+    
     var searchField: UITextField = {
         var textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -180,7 +174,7 @@ final class MainSearchView: UIView {
         textField.clipsToBounds = true
         textField.textColor = UIColor.lightGray
         textField.attributedPlaceholder = NSAttributedString(string: "  Search Artist, Album or Track...",
-                                                             attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+                                                            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         return textField
     }()
     

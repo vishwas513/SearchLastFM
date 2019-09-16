@@ -41,10 +41,5 @@ enum AppearanceManager {
         UISearchBar.appearance().tintColor = .white
         
         // MARK: SearchBar
-        
-        //UISearchBar.appearance().backgroundImage = UIElementsManager.createColoredImage()
-       // UISearchBar.appearance().tintColor = .medicalCityBlue
-       // UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.medicalCityBlue]
-        //UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).placeholder = "Search"
     }
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchResultCell: UITableViewCell {
+final class SearchResultCell: UITableViewCell {
     
     var searchImageView: UIImageView = {
         var imageView = UIImageView()
@@ -98,7 +98,6 @@ class SearchResultCell: UITableViewCell {
             searchResultSubtitle.topAnchor.constraint(equalTo: searchResultHeader.bottomAnchor, constant: ElementSizesManager.cellPaddigSize),
             searchResultSubtitle.trailingAnchor.constraint(equalTo: marginGuide.trailingAnchor, constant: -ElementSizesManager.cellPaddigSize),
             searchResultSubtitle.heightAnchor.constraint(equalToConstant: ElementSizesManager.cellSubtitleTextHeight),
-            
             ])
     }
 }

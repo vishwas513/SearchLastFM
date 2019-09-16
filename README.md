@@ -29,7 +29,7 @@
 
 
 ![](https://github.com/vishwas513/SearchLastFM/blob/master/Screenshots/pic1.png)
-![](https://github.com/vishwas513/SearchLastFM/blob/master/Screenshots/pic2png)
+![](https://github.com/vishwas513/SearchLastFM/blob/master/Screenshots/pic2.png)
 
 
 

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainSearchController: UIViewController, UITextFieldDelegate {
+final class MainSearchController: UIViewController, UITextFieldDelegate {
     
     var mainSearchView: MainSearchView = { return MainSearchView() }()
     var networkManager: NetworkManager

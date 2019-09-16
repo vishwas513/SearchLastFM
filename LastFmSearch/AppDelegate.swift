@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         window = UIWindow(frame:UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        
+        UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
         let viewController = MainSearchController(networkManager: client)
         window?.rootViewController = UINavigationController(rootViewController: viewController)
         

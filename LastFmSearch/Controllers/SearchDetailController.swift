@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchDetailController: UIViewController {
+final class SearchDetailController: UIViewController {
     
     let searchDetailView = SearchDetailView()
     var artistObject: Artist?
@@ -34,7 +34,6 @@ class SearchDetailController: UIViewController {
         searchDetailView.linkButton.addTarget(self, action: #selector(openLink(sender:)), for: .touchUpInside)
         
         searchDetailView.artistButton.addTarget(self, action: #selector(loadArtist(sender:)), for: .touchUpInside)
-        // Do any additional setup after loading the view.
     }
     
     @objc func openLink(sender: UIButton) {

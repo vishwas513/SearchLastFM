@@ -80,7 +80,6 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
             cell.transform = CGAffineTransform(translationX: 0, y: ElementSizesManager.cellRowHeight)
             cell.layer.shadowColor = UIColor.black.cgColor
             cell.layer.shadowOffset = CGSize(width: 10, height: 10)
@@ -99,6 +98,7 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
         let searchDetailController = SearchDetailController()
         searchDetailController.viewModel = viewModel
         switch viewModel?.searchSelectedSegmentIndex {
+            
         case 0:
             searchDetailController.artistObject = viewModel?.artistList[indexPath.row]
             guard let name = viewModel?.artistList[indexPath.row].name else { return }
@@ -117,7 +117,6 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
                         self.controller?.present(alert, animated: true)
                     }
                 }
-                
             })
             
         case 1:
@@ -138,6 +137,7 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
                     }
                 }
             })
+            
         default:
             searchDetailController.albumObject = viewModel?.albumList[indexPath.row]
             guard let name = viewModel?.albumList[indexPath.row].name, let artistName = viewModel?.albumList[indexPath.row].artist else { return }
@@ -156,14 +156,8 @@ extension MainSearchView: UITableViewDataSource, UITableViewDelegate {
                     }
                 }
             })
-            
         }
-        
-        
-        
-        
     }
-    
 }
 
 
@@ -171,6 +165,7 @@ final class MainSearchView: UIView {
     var viewModel: MainSearchViewModel?
     var controller: MainSearchController?
     let mainSearchViewModel = MainSearchViewModel()
+    
     var searchField: UITextField = {
         var textField = UITextField()
         textField.translatesAutoresizingMaskIntoConstraints = false
@@ -180,7 +175,7 @@ final class MainSearchView: UIView {
         textField.clipsToBounds = true
         textField.textColor = UIColor.lightGray
         textField.attributedPlaceholder = NSAttributedString(string: "  Search Artist, Album or Track...",
-                                                             attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+                                                            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         return textField
     }()
     

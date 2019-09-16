@@ -21,7 +21,8 @@
 - Reacts to each keystroke and fetches results.
 - Shows detailed desciption if available for each search result.
 - Project has been built with heavy use of version control, including pull requests to maintain accountablity.
-- I have performed a code review on the project. 
+- I have performed a code review on the project.
+- App is capable of opening the lastFM link of the seachResult in safari.
 
 
 
@@ -46,6 +47,7 @@
 - The ideal running enivorment is iOS 12.4, should work just fine on iOS 13 but hasn't been accounted for explicitly.
 - Has been tested on real devices.
 - Project does not use third party dependencies.
+- There seem to be many missing images for Artists and Tracks, This is coming directly from the backend server and the app would show images properly if they update it in the server. 
 
 Please feel free to contact me anytime if there is some issue, or if you need more information. Thanks.
 

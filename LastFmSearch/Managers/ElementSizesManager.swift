@@ -20,12 +20,12 @@ struct ElementSizesManager {
     static var searchBarHeight: CGFloat = 30
     static var cellHeaderTextHeight: CGFloat = 20
     static var cellSubtitleTextHeight: CGFloat = 15
-    
     static var cellRowHeight: CGFloat = 90
+    static var segmentControllerHeight: CGFloat = 30
     
     static var imageWidth: CGFloat = 30
     
-    static var segmentControllerHeight: CGFloat = 30
+    
     
 }
 
